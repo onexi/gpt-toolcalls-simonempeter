@@ -1,0 +1,359 @@
+[
+    {
+        "name": "Accor Stadium",
+        "city": "Sydney",
+        "latitude": -33.847191,
+        "longitude": 151.062927,
+        "date": "February 23, 2024"
+    },
+    {
+        "name": "Acrisure Stadium",
+        "city": "Pittsburgh",
+        "latitude": 40.446796,
+        "longitude": -80.016029,
+        "date": "June 16, 2023"
+    },
+    {
+        "name": "Allegiant Stadium",
+        "city": "Las Vegas",
+        "latitude": 36.090996,
+        "longitude": -115.183937,
+        "date": "March 24, 2023"
+    },
+    {
+        "name": "Allianz Parque",
+        "city": "São Paulo",
+        "latitude": -23.527634,
+        "longitude": -46.678738,
+        "date": "November 24, 2023"
+    },
+    {
+        "name": "Anfield",
+        "city": "Liverpool",
+        "latitude": 53.430843,
+        "longitude": -2.960977,
+        "date": "June 13, 2024"
+    },
+    {
+        "name": "AT&T Stadium",
+        "city": "Arlington",
+        "latitude": 32.748055,
+        "longitude": -97.093658,
+        "date": "March 31, 2023"
+    },
+    {
+        "name": "Aviva Stadium",
+        "city": "Dublin",
+        "latitude": 53.335178,
+        "longitude": -6.228656,
+        "date": "June 28, 2024"
+    },
+    {
+        "name": "BC Place",
+        "city": "Vancouver",
+        "latitude": 49.276718,
+        "longitude": -123.112404,
+        "date": "December 6, 2024"
+    },
+    {
+        "name": "Caesars Superdome",
+        "city": "New Orleans",
+        "latitude": 29.951048,
+        "longitude": -90.081589,
+        "date": "October 25, 2024"
+    },
+    {
+        "name": "Empower Field at Mile High",
+        "city": "Denver",
+        "latitude": 39.743958,
+        "longitude": -105.020241,
+        "date": "July 14, 2023"
+    },
+    {
+        "name": "Ernst Happel Stadium",
+        "city": "Vienna",
+        "latitude": 48.207184,
+        "longitude": 16.420685,
+        "date": "August 8, 2024"
+    },
+    {
+        "name": "Estádio do Sport Lisboa e Benfica",
+        "city": "Lisbon",
+        "latitude": 38.752663,
+        "longitude": -9.184940,
+        "date": "May 24, 2024"
+    },
+    {
+        "name": "Estadio Mâs Monumental",
+        "city": "Buenos Aires",
+        "latitude": -34.545338,
+        "longitude": -58.450108,
+        "date": "November 9, 2023"
+    },
+    {
+        "name": "Estádio Olímpico Nilton Santos",
+        "city": "Rio de Janeiro",
+        "latitude": -22.893339,
+        "longitude": -43.292648,
+        "date": "November 17, 2023"
+    },
+    {
+        "name": "Ford Field",
+        "city": "Detroit",
+        "latitude": 42.340115,
+        "longitude": -83.045937,
+        "date": "June 9, 2023"
+    },
+    {
+        "name": "Foro Sol",
+        "city": "Mexico City",
+        "latitude": 19.405022,
+        "longitude": -99.095901,
+        "date": "August 24, 2023"
+    },
+    {
+        "name": "Friends Arena",
+        "city": "Stockholm",
+        "latitude": 59.372726,
+        "longitude": 18.000059,
+        "date": "May 17, 2024"
+    },
+    {
+        "name": "GEHA Field at Arrowhead Stadium",
+        "city": "Kansas City",
+        "latitude": 39.048988,
+        "longitude": -94.484123,
+        "date": "July 7, 2023"
+    },
+    {
+        "name": "Gillette Stadium",
+        "city": "Foxborough",
+        "latitude": 42.091045,
+        "longitude": -71.264832,
+        "date": "May 19, 2023"
+    },
+    {
+        "name": "Groupama Stadium",
+        "city": "Lyon",
+        "latitude": 45.765259,
+        "longitude": 4.981799,
+        "date": "June 2, 2024"
+    },
+    {
+        "name": "Hard Rock Stadium",
+        "city": "Miami Gardens",
+        "latitude": 25.958094,
+        "longitude": -80.239700,
+        "date": "October 18, 2024"
+    },
+    {
+        "name": "Johan Cruyff Arena",
+        "city": "Amsterdam",
+        "latitude": 52.314365,
+        "longitude": 4.941623,
+        "date": "July 4, 2024"
+    },
+    {
+        "name": "Levi's Stadium",
+        "city": "Santa Clara",
+        "latitude": 37.403267,
+        "longitude": -121.969589,
+        "date": "July 28, 2023"
+    },
+    {
+        "name": "Lincoln Financial Field",
+        "city": "Philadelphia",
+        "latitude": 39.901066,
+        "longitude": -75.167656,
+        "date": "May 12, 2023"
+    },
+    {
+        "name": "Lucas Oil Stadium",
+        "city": "Indianapolis",
+        "latitude": 39.760151,
+        "longitude": -86.164291,
+        "date": "November 1, 2024"
+    },
+    {
+        "name": "Lumen Field",
+        "city": "Seattle",
+        "latitude": 47.595123,
+        "longitude": -122.331970,
+        "date": "July 22, 2023"
+    },
+    {
+        "name": "Melbourne Cricket Ground",
+        "city": "Melbourne",
+        "latitude": -37.819973,
+        "longitude": 144.983307,
+        "date": "February 16, 2024"
+    },
+    {
+        "name": "Mercedes-Benz Stadium",
+        "city": "Atlanta",
+        "latitude": 33.755486,
+        "longitude": -84.400818,
+        "date": "April 28, 2023"
+    },
+    {
+        "name": "MetLife Stadium",
+        "city": "East Rutherford",
+        "latitude": 40.813553,
+        "longitude": -74.074623,
+        "date": "May 26, 2023"
+    },
+    {
+        "name": "Nissan Stadium",
+        "city": "Nashville",
+        "latitude": 36.166542,
+        "longitude": -86.771591,
+        "date": "May 5, 2023"
+    },
+    {
+        "name": "NRG Stadium",
+        "city": "Houston",
+        "latitude": 29.684835,
+        "longitude": -95.411156,
+        "date": "April 21, 2023"
+    },
+    {
+        "name": "Olympiastadion",
+        "city": "Munich",
+        "latitude": 48.173096,
+        "longitude": 11.545828,
+        "date": "July 27, 2024"
+    },
+   {
+       "name": "Paris La Défense Arena",
+       "city": "Paris",
+       "latitude": 48.894730,
+       "longitude": 2.229662,
+       "date": "May 9, 2024"
+   },
+   {
+       "name": "Paycor Stadium",
+       "city": "Cincinnati",
+       "latitude": 39.095455,
+       "longitude": -84.516273,
+       "date": "June 30, 2023"
+   },
+   {
+       "name": "PGE Narodowy",
+       "city": "Warsaw",
+       "latitude": 52.239326,
+       "longitude": 21.044790,
+       "date": "August 1, 2024"
+   },
+   {
+       "name": "Principality Stadium",
+       "city": "Cardiff",
+       "latitude": 51.478283,
+       "longitude": -3.183065,
+       "date": "June 18, 2024"
+   },
+   {
+       "name": "Raymond James Stadium",
+       "city": "Tampa",
+       "latitude": 27.975967,
+       "longitude": -82.503555,
+       "date": "April 13, 2023"
+   },
+   {
+       "name": "Rogers Centre",
+       "city": "Toronto",
+       "latitude": 43.641628,
+       "longitude": -79.389397,
+       "date": "November 14, 2024"
+   },
+   {
+       "name": "Santiago Bernabéu Stadium",
+       "city": "Madrid",
+       "latitude": 40.452988,
+       "longitude": -3.688545,
+       "date": "May 30, 2024"
+   },
+   {
+       "name": "Scottish Gas Murrayfield Stadium",
+       "city": "Edinburgh",
+       "latitude": 55.942173,
+       "longitude": -3.241252,
+       "date": "June 7, 2024"
+   },
+   {
+       "name": "Singapore National Stadium",
+       "city": "Singapore",
+       "latitude": 1.304502,
+       "longitude": 103.873734,
+       "date": "March 2, 2024"
+   },
+   {
+       "name": "SoFi Stadium",
+       "city": "Inglewood",
+       "latitude": 33.953461,
+       "longitude": -118.339386,
+       "date": "August 3, 2023"
+   },
+   {
+       "name": "Soldier Field",
+       "city": "Chicago",
+       "latitude": 41.862385,
+       "longitude": -87.617012,
+       "date": "June 2, 2023"
+   },
+   {
+       "name": "Stadio San Siro",
+       "city": "Milan",
+       "latitude": 45.477951,
+       "longitude": 9.123648,
+       "date": "July 13, 2024"
+   },
+   {
+       "name": "Stadion Letzigrund",
+       "city": "Zurich",
+       "latitude": 47.382622,
+       "longitude": 8.503521,
+       "date": "July 9, 2024"
+   },
+   {
+       "name": "State Farm Stadium",
+       "city": "Glendale",
+       "latitude": 33.527809,
+       "longitude": -112.262878,
+       "date": "March 17, 2023"
+   },
+   {
+       "name": "Tokyo Dome",
+       "city": "Tokyo",
+       "latitude": 35.705643,
+       "longitude": 139.751587,
+       "date": "February 7, 2024"
+   },
+   {
+       "name": "U.S. Bank Stadium",
+       "city": "Minneapolis",
+       "latitude": 44.973652,
+       "longitude": -93.257851,
+       "date": "June 23, 2023"
+   },
+   {
+       "name": "VELTINS-Arena",
+       "city": "Gelsenkirchen",
+       "latitude": 51.554565,
+       "longitude": 7.067098,
+       "date": "July 17, 2024"
+   },
+   {
+       "name": "Volksparkstadion",
+       "city": "Hamburg",
+       "latitude": 53.587109,
+       "longitude": 9.898227,
+       "date": "July 23, 2024"
+   },
+   {
+       "name": "Wembley Stadium",
+       "city": "London",
+       "latitude": 51.555973,
+       "longitude": -0.279930,
+       "date": "August 15, 2024"
+   }
+]
