@@ -4,356 +4,399 @@
         "city": "Sydney",
         "latitude": -33.847191,
         "longitude": 151.062927,
-        "date": "February 23, 2024"
+        "date": "February 23, 2024",
+        "image_url": "https://www.austadiums.com/stadiums/photos/accor-stadium-22.jpg"
     },
     {
         "name": "Acrisure Stadium",
         "city": "Pittsburgh",
         "latitude": 40.446796,
         "longitude": -80.016029,
-        "date": "June 16, 2023"
+        "date": "June 16, 2023",
+        "image_url": "https://9b16f79ca967fd0708d1-2713572fef44aa49ec323e813b06d2d9.ssl.cf2.rackcdn.com/1140x_a10-7_cTC/20220711MTHeinzFieldAerials01-1657562902.jpg"
     },
     {
         "name": "Allegiant Stadium",
         "city": "Las Vegas",
         "latitude": 36.090996,
         "longitude": -115.183937,
-        "date": "March 24, 2023"
+        "date": "March 24, 2023",
+        "image_url": "https://www.rios.com/wp-content/uploads/2021/01/Allegiant-Stadium_Jason-ORear_RIOS-aerial-2.jpg"
     },
     {
         "name": "Allianz Parque",
         "city": "São Paulo",
         "latitude": -23.527634,
         "longitude": -46.678738,
-        "date": "November 24, 2023"
+        "date": "November 24, 2023",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Imagens_da_Cidade_de_S%C3%A3o_Paulo_e_Zool%C3%B3gico_da_Capital_Paulista._%2847480340301%29.jpg"
     },
     {
         "name": "Anfield",
         "city": "Liverpool",
         "latitude": 53.430843,
         "longitude": -2.960977,
-        "date": "June 13, 2024"
+        "date": "June 13, 2024",
+        "image_url": "https://static.wikia.nocookie.net/liverpoolfc/images/8/85/Anfieldmodern.jpg/revision/latest/scale-to-width-down/1200?cb=20200501150202"
     },
     {
         "name": "AT&T Stadium",
         "city": "Arlington",
         "latitude": 32.748055,
         "longitude": -97.093658,
-        "date": "March 31, 2023"
+        "date": "March 31, 2023",
+        "image_url": "https://www.hksinc.com/wp-content/uploads/2009/10/ATT_economic-1.jpg"
     },
     {
         "name": "Aviva Stadium",
         "city": "Dublin",
         "latitude": 53.335178,
         "longitude": -6.228656,
-        "date": "June 28, 2024"
+        "date": "June 28, 2024",
+        "image_url": "https://www.go-to-ireland.com/wp-content/uploads/2010/12/aviva-stadium-1024x500.jpg"
     },
     {
         "name": "BC Place",
         "city": "Vancouver",
         "latitude": 49.276718,
         "longitude": -123.112404,
-        "date": "December 6, 2024"
+        "date": "December 6, 2024",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmsOU1ZLwnFY6_Q0hF40aWUjbafb2_DS13ZA&s"
     },
     {
         "name": "Caesars Superdome",
         "city": "New Orleans",
         "latitude": 29.951048,
         "longitude": -90.081589,
-        "date": "October 25, 2024"
+        "date": "October 25, 2024",
+        "image_url": "https://seatgeek.com/images/performers-landscape/new-orleans-saints-1a7f91/2069/720x450.jpg"
     },
     {
         "name": "Empower Field at Mile High",
         "city": "Denver",
         "latitude": 39.743958,
         "longitude": -105.020241,
-        "date": "July 14, 2023"
-    },
-    {
-        "name": "Ernst Happel Stadium",
-        "city": "Vienna",
-        "latitude": 48.207184,
-        "longitude": 16.420685,
-        "date": "August 8, 2024"
+        "date": "July 14, 2023",
+        "image_url": "https://www.empower.com/sites/default/files/styles/large_hq/public/image/2023-01/empower_fields_stadium.png?itok=zh5uGW-k"
     },
     {
         "name": "Estádio do Sport Lisboa e Benfica",
         "city": "Lisbon",
         "latitude": 38.752663,
         "longitude": -9.184940,
-        "date": "May 24, 2024"
+        "date": "May 24, 2024",
+        "image_url": "https://img.freepik.com/premium-photo/breathtaking-aerial-perspective-estadio-sport-lisboa-e-benfica-revealed-lisbon-s-splendor_983420-229146.jpg"
     },
     {
         "name": "Estadio Mâs Monumental",
         "city": "Buenos Aires",
         "latitude": -34.545338,
         "longitude": -58.450108,
-        "date": "November 9, 2023"
+        "date": "November 9, 2023",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsom8l7jxPO-xjOUoeIdHCngJL7RWJitQs3g&s"
     },
     {
         "name": "Estádio Olímpico Nilton Santos",
         "city": "Rio de Janeiro",
         "latitude": -22.893339,
         "longitude": -43.292648,
-        "date": "November 17, 2023"
+        "date": "November 17, 2023",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Rio2016_Gerais_030_8069_-c-2016_GabrielHeusi_HeusiAction.jpg"
     },
     {
         "name": "Ford Field",
         "city": "Detroit",
         "latitude": 42.340115,
         "longitude": -83.045937,
-        "date": "June 9, 2023"
+        "date": "June 9, 2023",
+        "image_url": "https://www.fordfield.com/assets/img/ford-field-about-exterior-fd6f90c046.jpg"
     },
     {
         "name": "Foro Sol",
         "city": "Mexico City",
         "latitude": 19.405022,
         "longitude": -99.095901,
-        "date": "August 24, 2023"
+        "date": "August 24, 2023",
+        "image_url": "https://images.pond5.com/drone-shot-approaching-stage-foro-footage-242641665_iconl.jpeg"
     },
     {
         "name": "Friends Arena",
         "city": "Stockholm",
         "latitude": 59.372726,
         "longitude": 18.000059,
-        "date": "May 17, 2024"
+        "date": "May 17, 2024",
+        "image_url": "https://archello.s3.eu-central-1.amazonaws.com/images/2012/09/11/Fasadskymning.1506068326.8188.jpg"
     },
     {
         "name": "GEHA Field at Arrowhead Stadium",
         "city": "Kansas City",
         "latitude": 39.048988,
         "longitude": -94.484123,
-        "date": "July 7, 2023"
+        "date": "July 7, 2023",
+        "image_url": "https://images.squarespace-cdn.com/content/v1/5d72a948ab019831fc775aa7/1568837902946-LLMIWI9BXXKB7SSX5SP3/Arrowhead+2.JPG"
     },
     {
         "name": "Gillette Stadium",
         "city": "Foxborough",
         "latitude": 42.091045,
         "longitude": -71.264832,
-        "date": "May 19, 2023"
+        "date": "May 19, 2023",
+        "image_url": "https://s44872.pcdn.co/wp-content/uploads/2022/02/Gillette_Stadium_2.jpeg.optimal.jpeg"
     },
     {
         "name": "Groupama Stadium",
         "city": "Lyon",
         "latitude": 45.765259,
         "longitude": 4.981799,
-        "date": "June 2, 2024"
+        "date": "June 2, 2024",
+        "image_url": "https://stadiumdb.com/pictures/stadiums/fra/parc_ol/parc_ol31.jpg"
     },
     {
         "name": "Hard Rock Stadium",
         "city": "Miami Gardens",
         "latitude": 25.958094,
         "longitude": -80.239700,
-        "date": "October 18, 2024"
+        "date": "October 18, 2024",
+        "image_url": "https://hbre.us/wp-content/uploads/2020/01/AdobeStock_305521418_Editorial_Use_Only-scaled.jpeg"
     },
     {
         "name": "Johan Cruyff Arena",
         "city": "Amsterdam",
         "latitude": 52.314365,
         "longitude": 4.941623,
-        "date": "July 4, 2024"
+        "date": "July 4, 2024",
+        "image_url": "https://d189tumsugqfi4.cloudfront.net/_909x569_crop_center-center_80_none/arena-overdag-hr.jpg"
     },
     {
         "name": "Levi's Stadium",
         "city": "Santa Clara",
         "latitude": 37.403267,
         "longitude": -121.969589,
-        "date": "July 28, 2023"
+        "date": "July 28, 2023",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH1JZK6vcAWvZpzmVMDY39oI2S8em9FJHcnw&s"
     },
     {
         "name": "Lincoln Financial Field",
         "city": "Philadelphia",
         "latitude": 39.901066,
         "longitude": -75.167656,
-        "date": "May 12, 2023"
+        "date": "May 12, 2023",
+        "image_url": "https://skylinespace.nyc3.cdn.digitaloceanspaces.com/media/images/philadelphia_005_0062_up.jpg"
     },
     {
         "name": "Lucas Oil Stadium",
         "city": "Indianapolis",
         "latitude": 39.760151,
         "longitude": -86.164291,
-        "date": "November 1, 2024"
+        "date": "November 1, 2024",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Aerial_view_of_Indianapolis%2C_Indiana%2C_with_a_focus_on_Lucas_Oil_Stadium%2C_highsm.40934.jpg/1200px-Aerial_view_of_Indianapolis%2C_Indiana%2C_with_a_focus_on_Lucas_Oil_Stadium%2C_highsm.40934.jpg"
     },
     {
         "name": "Lumen Field",
         "city": "Seattle",
         "latitude": 47.595123,
         "longitude": -122.331970,
-        "date": "July 22, 2023"
+        "date": "July 22, 2023",
+        "image_url": "https://cdn.prod.website-files.com/606f2fff33ee7e4d0e09852e/66f5d89d8ea1bb73e3d20f12_LumenFieldNight_1920x1080.jpg"
     },
     {
         "name": "Melbourne Cricket Ground",
         "city": "Melbourne",
         "latitude": -37.819973,
         "longitude": 144.983307,
-        "date": "February 16, 2024"
+        "date": "February 16, 2024",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyds1ogk0wTj_pihX4Zy39mmF3IuOf_o5buA&s"
     },
     {
         "name": "Mercedes-Benz Stadium",
         "city": "Atlanta",
         "latitude": 33.755486,
         "longitude": -84.400818,
-        "date": "April 28, 2023"
+        "date": "April 28, 2023",
+        "image_url": "https://cdn.prod.website-files.com/5ddedb3aabcf2c01a3f45461/64ba3cf5ea0a30cccb7accf9_Falcon-66-copy-e1510676998489.jpg"
     },
     {
         "name": "MetLife Stadium",
         "city": "East Rutherford",
         "latitude": 40.813553,
         "longitude": -74.074623,
-        "date": "May 26, 2023"
+        "date": "May 26, 2023",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Metlife_stadium_%28Aerial_view%29.jpg/300px-Metlife_stadium_%28Aerial_view%29.jpg"
     },
     {
         "name": "Nissan Stadium",
         "city": "Nashville",
         "latitude": 36.166542,
         "longitude": -86.771591,
-        "date": "May 5, 2023"
+        "date": "May 5, 2023",
+        "image_url": "https://www.nashville.gov/sites/default/files/styles/max_size/public/2022-12/Nissan.jpg?itok=XFan24R-"
     },
     {
         "name": "NRG Stadium",
         "city": "Houston",
         "latitude": 29.684835,
         "longitude": -95.411156,
-        "date": "April 21, 2023"
+        "date": "April 21, 2023",
+        "image_url": "https://www.nrgpark.com/wp-content/uploads/poster-nrg-facilities.jpg"
     },
     {
         "name": "Olympiastadion",
         "city": "Munich",
         "latitude": 48.173096,
         "longitude": 11.545828,
-        "date": "July 27, 2024"
+        "date": "July 27, 2024",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blick_vom_Olympiaberg_auf_das_Olympiastadion.jpg/1200px-Blick_vom_Olympiaberg_auf_das_Olympiastadion.jpg"
     },
    {
        "name": "Paris La Défense Arena",
        "city": "Paris",
        "latitude": 48.894730,
        "longitude": 2.229662,
-       "date": "May 9, 2024"
+       "date": "May 9, 2024",
+       "image_url": "https://images.adsttc.com/media/images/66a3/ac0a/c8b7/c854/2cea/de42/newsletter/paris-la-defense-arena-2p-architectes-and-associes_7.jpg?1722002491"
    },
    {
        "name": "Paycor Stadium",
        "city": "Cincinnati",
        "latitude": 39.095455,
        "longitude": -84.516273,
-       "date": "June 30, 2023"
+       "date": "June 30, 2023",
+       "image_url": "https://images.prismic.io/bounce/23aca330-0c29-40f7-abd8-76d308b5058a_jake-blucker-wGrMugF20v4-unsplash+%281%29.jpg?auto=format%2Ccompress&w=1466&fit=crop&ar=3%3A2"
    },
    {
        "name": "PGE Narodowy",
        "city": "Warsaw",
        "latitude": 52.239326,
        "longitude": 21.044790,
-       "date": "August 1, 2024"
+       "date": "August 1, 2024",
+       "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHClhxj11qr1THlQGvXN_TCvikAIIfDAGqBw&s"
    },
    {
        "name": "Principality Stadium",
        "city": "Cardiff",
        "latitude": 51.478283,
        "longitude": -3.183065,
-       "date": "June 18, 2024"
+       "date": "June 18, 2024",
+       "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGEODQQhYYNM9U_yIvxAZRSzt4mm6rAIq5sQ&s"
    },
    {
        "name": "Raymond James Stadium",
        "city": "Tampa",
        "latitude": 27.975967,
        "longitude": -82.503555,
-       "date": "April 13, 2023"
+       "date": "April 13, 2023",
+       "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi8Oyecsv07rrHmVyiynZDVPImvjZ2N4oz7w&s"
    },
    {
        "name": "Rogers Centre",
        "city": "Toronto",
        "latitude": 43.641628,
        "longitude": -79.389397,
-       "date": "November 14, 2024"
+       "date": "November 14, 2024",
+       "image_url": "https://i.pinimg.com/736x/65/34/cc/6534cca5af427b142baea83cd3809736.jpg"
    },
    {
        "name": "Santiago Bernabéu Stadium",
        "city": "Madrid",
        "latitude": 40.452988,
        "longitude": -3.688545,
-       "date": "May 30, 2024"
+       "date": "May 30, 2024",
+       "image_url": "https://www.spain.info/.content/imagenes/cabeceras-grandes/madrid/estadio-bernabeu-vista-aerea-c-turismo-madrid.jpg"
    },
    {
        "name": "Scottish Gas Murrayfield Stadium",
        "city": "Edinburgh",
        "latitude": 55.942173,
        "longitude": -3.241252,
-       "date": "June 7, 2024"
+       "date": "June 7, 2024",
+       "image_url": "https://www.eventmasters.co.uk/wp-content/uploads/2021/02/murrayfieldstadium.jpg"
    },
    {
        "name": "Singapore National Stadium",
        "city": "Singapore",
        "latitude": 1.304502,
        "longitude": 103.873734,
-       "date": "March 2, 2024"
+       "date": "March 2, 2024",
+       "image_url": "https://assets.newatlas.com/dims4/default/25c9989/2147483647/strip/true/crop/2027x1351+187+0/resize/1200x800!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fsingapore_national_stadium.jpg"
    },
    {
        "name": "SoFi Stadium",
        "city": "Inglewood",
        "latitude": 33.953461,
        "longitude": -118.339386,
-       "date": "August 3, 2023"
+       "date": "August 3, 2023",
+       "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRKNyBS9vjRXiGYEslnDMJYTORXmLGShTyFA&s"
    },
    {
        "name": "Soldier Field",
        "city": "Chicago",
        "latitude": 41.862385,
        "longitude": -87.617012,
-       "date": "June 2, 2023"
+       "date": "June 2, 2023",
+       "image_url": "https://www.soldierfield.com/assets/img/default-intro-82e4e9f343.jpg"
    },
    {
        "name": "Stadio San Siro",
        "city": "Milan",
        "latitude": 45.477951,
        "longitude": 9.123648,
-       "date": "July 13, 2024"
+       "date": "July 13, 2024",
+       "image_url": "https://ewvzxy5ivh6.exactdn.com/wp-content/uploads/2024/02/Stadio-Meazza-San-Siro-foto-Claudio-Furlan-LaPresse.jpg?strip=all&lossy=1&ssl=1"
    },
    {
        "name": "Stadion Letzigrund",
        "city": "Zurich",
        "latitude": 47.382622,
        "longitude": 8.503521,
-       "date": "July 9, 2024"
+       "date": "July 9, 2024",
+       "image_url": "https://www.sportclinic.ch/data/docs/de/2626/Standorte-Letzigrund.webp?variant=4866&v=1.0"
    },
    {
        "name": "State Farm Stadium",
        "city": "Glendale",
        "latitude": 33.527809,
        "longitude": -112.262878,
-       "date": "March 17, 2023"
+       "date": "March 17, 2023",
+       "image_url": "https://freight.cargo.site/t/original/i/85469701d57100274188ac560fdc494e9c1d70f4d35be8ba583f9e386735da6b/36.jpg"
    },
    {
        "name": "Tokyo Dome",
        "city": "Tokyo",
        "latitude": 35.705643,
        "longitude": 139.751587,
-       "date": "February 7, 2024"
+       "date": "February 7, 2024",
+       "image_url": "https://www.tokyo-dome.jp/english/upload/2023/02/top_slide02-scaled-0x0.jpg"
    },
    {
        "name": "U.S. Bank Stadium",
        "city": "Minneapolis",
        "latitude": 44.973652,
        "longitude": -93.257851,
-       "date": "June 23, 2023"
+       "date": "June 23, 2023",
+       "image_url": "https://ranieng.com/wp/wp-content/uploads/2019/09/US-Bank-Stadium_skyview.jpg"
    },
    {
        "name": "VELTINS-Arena",
        "city": "Gelsenkirchen",
        "latitude": 51.554565,
        "longitude": 7.067098,
-       "date": "July 17, 2024"
+       "date": "July 17, 2024",
+       "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfxQsBXqxOuqBgB6CJovs0_F6lda55uuYP8w&s"
    },
    {
        "name": "Volksparkstadion",
        "city": "Hamburg",
        "latitude": 53.587109,
        "longitude": 9.898227,
-       "date": "July 23, 2024"
+       "date": "July 23, 2024",
+       "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/de/RK_1009_9831_Volksparkstadion.jpg"
    },
    {
        "name": "Wembley Stadium",
        "city": "London",
        "latitude": 51.555973,
        "longitude": -0.279930,
-       "date": "August 15, 2024"
+       "date": "August 15, 2024",
+       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/London_Wembley.jpg/1200px-London_Wembley.jpg"
    }
 ]
