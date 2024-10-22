@@ -177,6 +177,50 @@ app.post('/api/openai-call', async (req, res) => {
     }
 });
 
+app.post('/api/get-concert-weather', async (req, res) => {
+    const { stadium_message } = req.body;
+
+    try {
+        // Log the user input for debugging
+        console.log(`User input: ${stadium_message}`);
+
+        // Extract the stadium name
+        const stadiumMatch = stadium_message.match(/in\s+(.+)/i);
+        if (!stadiumMatch || stadiumMatch.length < 2) {
+            return res.status(400).json({ error: 'Invalid stadium message format. Please enter a message like "Let me relive the concert in [stadium]"' });
+        }
+
+        const stadiumName = stadiumMatch[1].trim();
+        console.log(`Extracted stadium name: ${stadiumName}`);
+
+        // Find the stadium data in the JSON file
+        const stadiums = JSON.parse(fs.readFileSync('./public/eras_tour_stadiums.json', 'utf8'));
+        const stadiumData = stadiums.find(stadium => stadium.name.toLowerCase() === stadiumName.toLowerCase());
+
+        if (!stadiumData) {
+            return res.status(404).json({ error: `Stadium '${stadiumName}' not found. Please try again with a valid stadium name.` });
+        }
+
+        const { latitude, longitude, date } = stadiumData;
+
+        // Log the weather request details
+        console.log(`Fetching weather for lat=${latitude}, lon=${longitude}, date=${date}`);
+
+        // Call the get_weather function to fetch weather data for the concert date
+        const functions = await getFunctions();  // Assuming this gets all functions, including get_weather
+        const weatherResult = await functions['get_weather'].execute(latitude, longitude, date);
+
+        if (!weatherResult) {
+            return res.status(404).json({ error: 'Weather data not found.' });
+        }
+
+        // Send the user-specific message from ChatGPT back as the response
+        res.json({ message: weatherResult.message });
+    } catch (error) {
+        console.error('Error fetching concert weather:', error.message);
+        res.status(500).json({ error: 'Failed to retrieve concert weather', details: error.message });
+    }
+});
 
 // Start the server
 const PORT = 3000;
