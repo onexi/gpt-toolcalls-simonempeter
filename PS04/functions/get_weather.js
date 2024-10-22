@@ -74,14 +74,14 @@ export async function execute(latitude, longitude, date) {
         // Prepare the input for ChatGPT to formulate a Taylor Swift-inspired response
         const chatPrompt = `
             The average temperature was ${temperature_avg}°C, and it was categorized as ${temperatureDescription} with ${rainDescription}. 
-            Please generate a fun Taylor Swift-themed response mentioning her songs, as though you're describing the weather during a concert.
+            Please generate a fun Taylor Swift-themed response mentioning her songs, as though you're describing the weather during a concert. You also provide recommendations on what to wear for that specific weather.
         `;
 
         // Call ChatGPT to generate the response using the correct OpenAI method
         const chatResponse = await openai.chat.completions.create({
             model: 'gpt-4-0613',
             messages: [
-                { role: 'system', content: 'You are a helpful assistant who always responds with fun and energetic Taylor Swift song references. Incorporate a Taylor Swift vibe into your responses and mention her songs or albums casually.' },
+                { role: 'system', content: 'You are a helpful assistant who always responds with fun and energetic Taylor Swift song references. Incorporate a Taylor Swift vibe into your responses and mention her songs or albums casually. You also provide recommendations on what to wear for that specific weather.' },
                 { role: 'user', content: chatPrompt }
             ]
         });
