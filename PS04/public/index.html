@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find the Closest Stadium</title>
+    <title>Find the Closest Stadium or Relive the Concert</title>
     <script>
-        async function findClosestStadium() {
+        async function handleUserInput() {
             const userMessage = document.getElementById("userInput").value;
 
             try {
@@ -18,60 +18,23 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Error fetching stadium data: ${response.statusText}`);
+                    throw new Error(`Error processing request: ${response.statusText}`);
                 }
 
                 const data = await response.json();
                 document.getElementById("result").innerHTML = data.message;
-
-                // Enable the second input once a stadium is found
-                document.getElementById("reliveConcertInput").style.display = 'block';
             } catch (error) {
                 console.error('Error occurred:', error);
                 document.getElementById("result").innerHTML = `Error: ${error.message}`;
             }
         }
-
-        async function reliveConcert() {
-    const stadiumMessage = "Let me relive the concert in Gillette Stadium";
-    try {
-        const response = await fetch('/api/get-concert-weather', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ stadium_message: stadiumMessage }),
-        });
-        if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-        }
-        const data = await response.json();
-        console.log('Concert weather:', data.message);
-        // Display the message in the UI
-        document.getElementById('result').innerHTML = data.message;
-    } catch (error) {
-        console.error('Error occurred:', error);
-        document.getElementById('result').innerHTML = `Error: ${error.message}`;
-    }
-}
-
     </script>
 </head>
 <body>
-    <h1>Find the Closest Stadium to You!</h1>
-    <input type="text" id="userInput" placeholder="Enter your city (e.g., Boston)" />
-    <button onclick="findClosestStadium()">Find Stadium</button>
+    <h1>Find the Closest Stadium or Relive a Taylor Swift Concert!</h1>
+    <input type="text" id="userInput" placeholder="Enter your city or stadium name (e.g., Boston or Gillette Stadium)" />
+    <button onclick="handleUserInput()">Submit</button>
     <br><br>
     <div id="result" style="white-space: pre-line;"></div>
-
-    <!-- Input for reliving the concert -->
-    <div id="reliveConcertInput" style="display:none;">
-        <br>
-        <input type="text" id="stadiumMessage" placeholder='Enter "Let me relive the concert in [stadium]"' />
-        <button onclick="reliveConcert()">Relive Concert</button>
-    </div>
-    
-    <br><br>
-    <div id="weatherResult" style="white-space: pre-line;"></div> <!-- Display weather result -->
 </body>
 </html>

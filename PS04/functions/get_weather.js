@@ -8,13 +8,14 @@ export const details = {
         properties: {
             latitude: { type: "number", description: "The latitude of the stadium" },
             longitude: { type: "number", description: "The longitude of the stadium" },
-            date: { type: "string", description: "The date of the concert in YYYY-MM-DD format" }
+            date: { type: "string", description: "The date of the concert in YYYY-MM-DD format" },
+            stadium: { type: "string", description: "The name of the stadium" }
         },
-        required: ["latitude", "longitude", "date"]
+        required: ["latitude", "longitude", "date", "stadium"]
     }
 };
 
-export async function execute(latitude, longitude, date) {
+export async function execute(latitude, longitude, date, stadium) {
     try {
         // Load RapidAPI and OpenAI API keys from environment variables
         const apiKey = process.env.RAPIDAPI_KEY;
@@ -73,7 +74,7 @@ export async function execute(latitude, longitude, date) {
 
         // Prepare the input for ChatGPT to formulate a Taylor Swift-inspired response
         const chatPrompt = `
-            The average temperature was ${temperature_avg}°C, and it was categorized as ${temperatureDescription} with ${rainDescription}. 
+            The average temperature was ${temperature_avg}°C at ${stadium}, and it was categorized as ${temperatureDescription} with ${rainDescription}. 
             Please generate a fun Taylor Swift-themed response mentioning her songs, as though you're describing the weather during a concert. You also provide recommendations on what to wear for that specific weather.
         `;
 
