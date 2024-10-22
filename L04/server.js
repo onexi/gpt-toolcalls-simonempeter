@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+
 import express from 'express';
 import bodyParser from 'body-parser';
-import { OpenAI} from 'openai';
+import { OpenAI } from 'openai';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from "fs";
@@ -18,8 +21,10 @@ app.use(express.static(path.resolve(process.cwd(), './public')));
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+
+// Log state data
 let state = {
-    chatgpt:false,
+    chatgpt: false,
     assistant_id: "",
     assistant_name: "",
     dir_path: "",
@@ -29,15 +34,16 @@ let state = {
     run_id: "",
     run_status: "",
     vector_store_id: "",
-    tools:[],
+    tools: [],
     parameters: []
-  };
+};
+
 // Default route to serve index.html for any undefined routes
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(process.cwd(), './public/index.html'));
 });
+
 async function getFunctions() {
-   
     const files = fs.readdirSync(path.resolve(process.cwd(), "./functions"));
     const openAIFunctions = {};
 
@@ -60,54 +66,53 @@ async function getFunctions() {
 app.post('/api/execute-function', async (req, res) => {
     const { functionName, parameters } = req.body;
 
-    // Import all functions
-    const functions = await getFunctions();
-
-    if (!functions[functionName]) {
-        return res.status(404).json({ error: 'Function not found' });
-    }
-
     try {
+        // Import all functions
+        const functions = await getFunctions();
+
+        if (!functions[functionName]) {
+            return res.status(404).json({ error: 'Function not found' });
+        }
+
         // Call the function
         const result = await functions[functionName].execute(...Object.values(parameters));
-        console.log(`result: ${JSON.stringify(result)}`);
+        console.log(`Function result: ${JSON.stringify(result)}`);
         res.json(result);
     } catch (err) {
+        console.error('Error executing function:', err.message);
         res.status(500).json({ error: 'Function execution failed', details: err.message });
     }
 });
 
-// Example to interact with OpenAI API and get function descriptions
+// OpenAI API interaction with function call handling
 app.post('/api/openai-call', async (req, res) => {
     const { user_message } = req.body;
 
     const functions = await getFunctions();
     const availableFunctions = Object.values(functions).map(fn => fn.details);
-    console.log(`availableFunctions: ${JSON.stringify(availableFunctions)}`);
+
     let messages = [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: user_message }
     ];
+
     try {
         // Make OpenAI API call
         const response = await openai.chat.completions.create({
-            model: 'gpt-4o',
+            model: 'gpt-4-0613',
             messages: messages,
             tools: availableFunctions
         });
-       
-       // Extract the arguments for get_delivery_date
-// Note this code assumes we have already determined that the model generated a function call. See below for a more production ready example that shows how to check if the model generated a function call
+
+        // Check if OpenAI called a function
         const toolCall = response.choices[0].message.tool_calls[0];
 
-// Extract the arguments for get_delivery_date
-// Note this code assumes we have already determined that the model generated a function call. 
         if (toolCall) {
             const functionName = toolCall.function.name;
             const parameters = JSON.parse(toolCall.function.arguments);
 
             const result = await functions[functionName].execute(...Object.values(parameters));
-// note that we need to respond with the function call result to the model quoting the tool_call_id
+
             const function_call_result_message = {
                 role: "tool",
                 content: JSON.stringify({
@@ -115,23 +120,19 @@ app.post('/api/openai-call', async (req, res) => {
                 }),
                 tool_call_id: response.choices[0].message.tool_calls[0].id
             };
-            // add to the end of the messages array to send the function call result back to the model
+
+            // Add function call result to messages
             messages.push(response.choices[0].message);
             messages.push(function_call_result_message);
-            const completion_payload = {
-                model: "gpt-4o",
-                messages: messages,
-            };
-            // Call the OpenAI API's chat completions endpoint to send the tool call result back to the model
+
+            // Final response
             const final_response = await openai.chat.completions.create({
-                model: completion_payload.model,
-                messages: completion_payload.messages
+                model: "gpt-4-0613",
+                messages: messages,
             });
-            // Extract the output from the final response
-            let output = final_response.choices[0].message.content 
 
-
-            res.json({ message:output, state: state });
+            let output = final_response.choices[0].message.content;
+            res.json({ message: output, state: state });
         } else {
             res.json({ message: 'No function call detected.' });
         }
@@ -140,6 +141,7 @@ app.post('/api/openai-call', async (req, res) => {
         res.status(500).json({ error: 'OpenAI API failed', details: error.message });
     }
 });
+
 app.post('/api/prompt', async (req, res) => {
     // just update the state with the new prompt
     state = req.body;
@@ -151,6 +153,7 @@ app.post('/api/prompt', async (req, res) => {
         res.status(500).json({ message: 'User Message Failed', "state": state });
     }
 });
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {

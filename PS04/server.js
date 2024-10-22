@@ -3,11 +3,10 @@ dotenv.config(); // Load environment variables
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import { fileURLToPath } from 'url';
+import { OpenAI } from 'openai';
 import path from 'path';
-
-import { execute as getLocation } from './functions/get_location.js';
-import { findClosestStadium } from './functions/find_closest_stadium.js';
+import { fileURLToPath } from 'url';
+import fs from "fs";
 
 // Initialize Express server
 const app = express();
@@ -18,45 +17,148 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.resolve(process.cwd(), './public')));
 
-// Default route to serve index.html for any undefined routes
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(process.cwd(), './public/index.html'));
+// OpenAI API configuration
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Route to get the city coordinates and find the closest stadium
-app.post('/api/get-closest-stadium', async (req, res) => {
-    const { city } = req.body;
+// Log state data
+let state = {
+    chatgpt: false,
+    assistant_id: "",
+    assistant_name: "",
+    dir_path: "",
+    news_path: "",
+    thread_id: "",
+    user_message: "",
+    run_id: "",
+    run_status: "",
+    vector_store_id: "",
+    tools: [],
+    parameters: []
+};
+
+// Taylor Swift song references array
+const taylorSwiftReferences = [
+    "You're bound to hear 'Love Story' live and sing along to every word!",
+    "'Shake It Off' is coming to a stadium near you—get ready to dance!",
+    "Get ready for 'Blank Space'—a hit that'll fill the whole stadium with energy!",
+    "'You Belong With Me' is going to sound amazing in this venue!",
+    "It's 'All Too Well'—this stadium is perfect for those emotional hits!",
+    "'Wildest Dreams' coming true at this incredible venue!",
+    "Prepare for an unforgettable performance of 'We Are Never Ever Getting Back Together'!"
+];
+
+// Randomly select a Taylor Swift song reference
+function getRandomTaylorSwiftReference() {
+    const randomIndex = Math.floor(Math.random() * taylorSwiftReferences.length);
+    return taylorSwiftReferences[randomIndex];
+}
+
+async function getFunctions() {
+    const files = fs.readdirSync(path.resolve(process.cwd(), "./functions"));
+    const openAIFunctions = {};
+
+    for (const file of files) {
+        if (file.endsWith(".js")) {
+            const moduleName = file.slice(0, -3); // Extract module name
+            const modulePath = `./functions/${moduleName}.js`; // Construct the module path
+            
+            // Import the module dynamically
+            const { details, execute } = await import(modulePath);
+            
+            // Save the function in openAIFunctions with its module name
+            openAIFunctions[moduleName] = {
+                "details": details,
+                "execute": execute
+            };
+        }
+    }
+    return openAIFunctions;
+}
+
+
+// Route to interact with OpenAI API
+app.post('/api/execute-function', async (req, res) => {
+    const { functionName, parameters } = req.body;
 
     try {
-        // Step 1: Get city coordinates
-        const cityCoordinates = await getLocation(city);
+        // Import all functions
+        const functions = await getFunctions();
 
-        if (cityCoordinates.error) {
-            return res.status(400).json({ error: cityCoordinates.error });
+        if (!functions[functionName]) {
+            return res.status(404).json({ error: 'Function not found' });
         }
 
-        // Step 2: Find the closest stadium
-        const closestStadium = await findClosestStadium(cityCoordinates);
-
-        if (closestStadium) {
-            return res.json({
-                city: cityCoordinates.city,
-                latitude: cityCoordinates.latitude,
-                longitude: cityCoordinates.longitude,
-                closestStadium: closestStadium.name,
-                stadiumCity: closestStadium.city,
-                distance: closestStadium.distance,
-                date: closestStadium.date,
-                image_url: closestStadium.image_url  // Include the stadium image URL
-            });
-        } else {
-            return res.status(404).json({ error: 'No stadiums found' });
-        }
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+        // Call the function
+        const result = await functions[functionName].execute(...Object.values(parameters));
+        console.log(`Function result: ${JSON.stringify(result)}`);
+        res.json(result);
+    } catch (err) {
+        console.error('Error executing function:', err.message);
+        res.status(500).json({ error: 'Function execution failed', details: err.message });
     }
 });
 
+app.post('/api/openai-call', async (req, res) => {
+    const { user_message } = req.body;
+
+    const functions = await getFunctions();
+    const availableFunctions = Object.values(functions).map(fn => fn.details);
+
+    let messages = [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: user_message }
+    ];
+
+    try {
+        // Log the received user message for debugging
+        console.log(`User message: ${user_message}`);
+
+        // Make OpenAI API call
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4-0613',
+            messages: messages,
+            functions: availableFunctions
+        });
+
+        // Check if OpenAI called a function
+        const toolCall = response.choices[0].message.function_call;
+
+        if (toolCall) {
+            const functionName = toolCall.name;
+            const parameters = JSON.parse(toolCall.arguments);
+
+            // First function: get_location
+            if (functionName === 'get_location') {
+                console.log(`Calling get_location with parameters: ${JSON.stringify(parameters)}`);
+
+                // Get the location (latitude, longitude)
+                const locationResult = await functions[functionName].execute(parameters.city);
+                const { latitude, longitude } = locationResult.location;
+
+                // Now call find_closest_stadium using the obtained coordinates
+                console.log(`Calling find_closest_stadium with coordinates: latitude=${latitude}, longitude=${longitude}`);
+
+                const stadiumResult = await functions['find_closest_stadium'].execute(latitude, longitude);
+
+                // Prepare the final response for the user
+                const message = `The closest stadium is ${stadiumResult.name} in ${stadiumResult.city}, which is ${stadiumResult.distance} km away. You can see it here: ${stadiumResult.image_url}.`;
+
+                res.json({ message });
+            } else {
+                res.json({ message: 'No function call detected.' });
+            }
+        } else {
+            res.json({ message: 'No function call detected.' });
+        }
+
+    } catch (error) {
+        // Log the error details
+        console.error(`OpenAI API failed: ${error.message}`);
+        res.status(500).json({ error: 'OpenAI API failed', details: error.message });
+    }
+});
 
 // Start the server
 const PORT = 3000;

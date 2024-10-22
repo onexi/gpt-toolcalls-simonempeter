@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import { OpenAI} from 'openai';

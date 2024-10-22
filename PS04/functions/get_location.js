@@ -1,49 +1,44 @@
-import fetch from 'node-fetch';
-
-const execute = async (city) => {
-    const apiUrl = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&format=json&limit=1`;
-
-    try {
-        const response = await fetch(apiUrl, {
-            headers: {
-                'User-Agent': 'ClosestErasTour/1.0 (smpeter@mit.edu)',
-            },
-        });
-        const data = await response.json();
-
-        if (data && data.length > 0) {
-            const cityCoordinates = {
-                city: data[0].display_name,
-                latitude: data[0].lat,
-                longitude: data[0].lon,
-            };
-
-            // Return the coordinates (the server will handle what to do next)
-            return cityCoordinates;
-        } else {
-            return { error: "Location not found" };
-        }
-    } catch (error) {
-        return { error: error.message };
+export const details = {
+    name: "get_location",
+    description: "Retrieve the latitude and longitude of a given city.",
+    parameters: {
+        type: "object",
+        properties: {
+            city: { type: "string", description: "The name of the city" }
+        },
+        required: ["city"]
     }
 };
 
-const details = {
-    type: "function",
-    function: {
-        name: "get_location",
-        parameters: {
-            type: "object",
-            properties: {
-                city: {
-                    type: "string",
-                    description: "The name of the city to get the location for"
-                }
-            },
-            required: ["city"]
-        }
-    },
-    description: "Fetch the latitude and longitude for a given city"
-};
+export async function execute(city) {
+    try {
+        // Log the city being searched
+        console.log(`Searching for location of city: ${city}`);
 
-export { execute, details };
+        // Fetch location data from an external API
+        const locationData = await fetch(`https://nominatim.openstreetmap.org/search?city=${city}&format=json&limit=1`);
+        const data = await locationData.json();
+
+        // Log the raw response from the API for debugging
+        console.log(`Raw location data response: ${JSON.stringify(data)}`);
+
+        // Check if the response has valid data
+        if (!Array.isArray(data) || data.length === 0) {
+            console.error('No location data found for the given city');
+            throw new Error('No location data found for the given city');
+        }
+
+        // Log the selected location data
+        console.log(`Selected location: lat=${data[0].lat}, lon=${data[0].lon}`);
+
+        const location = {
+            latitude: data[0].lat,
+            longitude: data[0].lon
+        };
+
+        return { location };
+    } catch (error) {
+        console.error(`Error fetching location data: ${error.message}`);
+        throw new Error('Failed to retrieve location');
+    }
+}
