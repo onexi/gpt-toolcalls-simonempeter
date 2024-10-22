@@ -107,7 +107,7 @@ app.post('/api/openai-call', async (req, res) => {
     const availableFunctions = Object.values(functions).map(fn => fn.details);
 
     let messages = [
-        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'system', content: 'You are a helpful assistant who always responds with fun and energetic Taylor Swift song references. Incorporate a Taylor Swift vibe into your responses and mention her songs or albums casually.' },
         { role: 'user', content: user_message }
     ];
 
@@ -142,8 +142,25 @@ app.post('/api/openai-call', async (req, res) => {
 
                 const stadiumResult = await functions['find_closest_stadium'].execute(latitude, longitude);
 
-                // Prepare the final response for the user
-                const message = `The closest stadium is ${stadiumResult.name} in ${stadiumResult.city}, which is ${stadiumResult.distance} km away. You can see it here: ${stadiumResult.image_url}.`;
+                // Create a new message for OpenAI API to generate the response
+                const messagesWithStadium = [
+                    { role: 'system', content: 'You are a helpful assistant who always responds with fun and energetic Taylor Swift song references. Incorporate a Taylor Swift vibe into your responses and mention her songs or albums casually.' },
+                    { role: 'user', content: `The closest stadium is ${stadiumResult.name} in ${stadiumResult.city}, which is ${stadiumResult.distance} km away. Show me how to describe this in a fun Taylor Swift way.` }
+                ];
+
+                // Make OpenAI API call to generate the final message
+                const finalResponse = await openai.chat.completions.create({
+                    model: 'gpt-4-0613',
+                    messages: messagesWithStadium
+                });
+
+                const finalMessage = finalResponse.choices[0].message.content;
+
+                // Prepare the final response with the image and OpenAI's generated text
+                const message = `
+                    <p>${finalMessage}</p>
+                    <p><img src="${stadiumResult.image_url}" alt="${stadiumResult.name}" style="max-width: 100%; height: auto;" /></p>
+                `;
 
                 res.json({ message });
             } else {
@@ -159,6 +176,7 @@ app.post('/api/openai-call', async (req, res) => {
         res.status(500).json({ error: 'OpenAI API failed', details: error.message });
     }
 });
+
 
 // Start the server
 const PORT = 3000;
