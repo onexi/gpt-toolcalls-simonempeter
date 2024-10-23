@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find the Closest Stadium or Relive the Concert</title>
+    <style>
+        /* Container for the images */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Add some space between the images */
+            max-width: 100%; /* Ensure the container stays within screen width */
+        }
+
+        /* Fixed size for the images */
+        .fixed-size-image {
+            width: 250px; /* Set the width of the images */
+            height: 250px; /* Set the height of the images */
+            object-fit: cover; /* Ensure the image fits within the defined width and height */
+        }
+
+        /* Style for the result container */
+        #result {
+            white-space: pre-line;
+        }
+    </style>
     <script>
         async function handleUserInput() {
             const userMessage = document.getElementById("userInput").value;
@@ -22,11 +44,43 @@
                 }
 
                 const data = await response.json();
-                document.getElementById("result").innerHTML = data.message;
+                displayResult(data); // Call the function to display result with images
             } catch (error) {
                 console.error('Error occurred:', error);
                 document.getElementById("result").innerHTML = `Error: ${error.message}`;
             }
+        }
+
+        // Function to process the result and dynamically add images in a side-by-side layout
+        function displayResult(data) {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = data.message;
+
+            // Remove any previously added images (clear old images)
+            const existingContainer = document.querySelector('.image-container');
+            if (existingContainer) {
+                existingContainer.remove();
+            }
+
+            // Create a new image container
+            const imageContainer = document.createElement("div");
+            imageContainer.classList.add("image-container");
+
+            // // Add images (stadium image and weather condition image)
+            // const stadiumImage = document.createElement("img");
+            // stadiumImage.src = data.stadiumImageUrl; // Ensure your backend returns this
+            // stadiumImage.classList.add("fixed-size-image");
+
+            // const weatherImage = document.createElement("img");
+            // weatherImage.src = data.weatherImageUrl; // Ensure your backend returns this
+            // weatherImage.classList.add("fixed-size-image");
+
+            // // Append images to container
+            // imageContainer.appendChild(stadiumImage);
+            // imageContainer.appendChild(weatherImage);
+
+            // // Append image container to resultDiv
+            // resultDiv.appendChild(imageContainer);
         }
     </script>
 </head>
@@ -35,6 +89,9 @@
     <input type="text" id="userInput" placeholder="Enter your city or stadium name (e.g., Boston or Gillette Stadium)" />
     <button onclick="handleUserInput()">Submit</button>
     <br><br>
-    <div id="result" style="white-space: pre-line;"></div>
+
+    <!-- Container for displaying the result including the images -->
+    <div id="result"></div>
+
 </body>
 </html>

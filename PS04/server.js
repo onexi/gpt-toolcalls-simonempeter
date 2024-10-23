@@ -97,7 +97,10 @@ app.post('/api/openai-call', async (req, res) => {
                 // Return the response from get_weather along with the image
                 const message = `
                     <p>${weatherResult.message}</p>
-                    <p><img src="${stadiumData.image_url}" alt="${stadiumData.name}" style="max-width: 100%; height: auto;" /></p>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                    <img src="${stadiumData.image_url}" alt="${stadiumData.name}" style="max-width: 50%; height: auto;" />
+                    <img src="${weatherResult.weatherImageUrl}" alt="Weather Condition Image" style="max-width: 50%; height: auto;" />
+                    </div>
                 `;
                 res.json({ message });
             }

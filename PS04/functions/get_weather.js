@@ -29,13 +29,9 @@ export async function execute(latitude, longitude, date, stadium) {
         let concertDate = new Date(date); 
         const today = new Date();
 
-        // Ensure we only modify the year if the concert date is in the future
+        // Adjust the year if the concert is in the future
         if (concertDate > today) {
-            const previousYear = concertDate.getFullYear() - 1;
-            concertDate.setFullYear(previousYear);
-            console.log(`Concert is in the future. Using weather from previous year: ${concertDate.toISOString().split('T')[0]}`);
-        } else {
-            console.log(`Concert is in the past or today. Using actual concert date: ${concertDate.toISOString().split('T')[0]}`);
+            concertDate.setFullYear(concertDate.getFullYear() - 1);
         }
 
         // Format the date as YYYY-MM-DD
@@ -68,7 +64,21 @@ export async function execute(latitude, longitude, date, stadium) {
 
         // Categorize the weather
         const temperatureDescription = temperature_avg > 18 ? 'warm' : 'cold';
-        const rainDescription = precipitation > 0 ? 'rain' : 'no rain';
+        const rainDescription = precipitation > 0 ? 'rain' : 'no_rain';
+
+        // Define the weather image mapping based on the conditions
+        const weatherImages = {
+            "warm_rain": "https://people.com/thmb/A1K88diR7uX2uLpP5l2YAe-BIDs=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(722x174:724x176)/Taylor-Swift-Hamburg-1-072324-43b24125acf647e2993ee6c2da2ccd2b.jpg",
+            "cold_rain": "https://people.com/thmb/TB_DrFMgqNOYFSdiYjd650yIEi8=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/taylor-swift-rain-eras-tour-052223-5-f1c153b487b542a1893036c630e72cb4.jpg",
+            "warm_no_rain": "https://images.prestigeonline.com/wp-content/uploads/sites/6/2023/08/08170529/Taylor-Swift-2024-03-08T143259.994-1.jpg",
+            "cold_no_rain": "https://assets.teenvogue.com/photos/641b2a23912ddccbabf80f80/16:9/w_6000,h_3375,c_limit/GettyImages-1474459622.jpg"
+        };
+
+        // Determine the weather condition key
+        const weatherConditionKey = `${temperatureDescription}_${rainDescription}`;
+
+        // Get the corresponding image URL for the weather condition
+        const weatherImageUrl = weatherImages[weatherConditionKey];
 
         // Prepare the input for ChatGPT to formulate a Taylor Swift-inspired response
         const chatPrompt = `
@@ -87,8 +97,11 @@ export async function execute(latitude, longitude, date, stadium) {
 
         const chatMessage = chatResponse.choices[0].message.content;
 
-        // Return the final message
-        return { message: chatMessage };
+        // Return the final message with the stadium image and the weather-related image
+        return { 
+            message: chatMessage,
+            weatherImageUrl: weatherImageUrl  // Return the corresponding weather image URL
+        };
 
     } catch (error) {
         console.error(`Error fetching weather data: ${error.message}`);
