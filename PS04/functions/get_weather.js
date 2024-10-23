@@ -1,8 +1,9 @@
-import OpenAIApi from 'openai';  // Import OpenAI client directly
+import OpenAIApi from 'openai';
+import fetch from 'node-fetch';  // Ensure you have this or use the appropriate fetch method for your environment
 
 export const details = {
     name: "get_weather",
-    description: "Retrieve historical weather data and categorize it for a specific latitude, longitude, and date via RapidAPI. Then, consult ChatGPT for a user-friendly response.",
+    description: "Retrieve historical weather data for a specific latitude, longitude, and date via RapidAPI. If the date is in the future, use the weather from the same day of the previous year.",
     parameters: {
         type: "object",
         properties: {
@@ -17,17 +18,28 @@ export const details = {
 
 export async function execute(latitude, longitude, date, stadium) {
     try {
-        // Load RapidAPI and OpenAI API keys from environment variables
-        const apiKey = process.env.RAPIDAPI_KEY;
+        // Load API keys from environment variables
+        const meteostatApiKey = process.env.RAPIDAPI_KEY;
         const openaiApiKey = process.env.OPENAI_API_KEY;
 
         // Initialize OpenAI client directly with API key
-        const openai = new OpenAIApi({
-            apiKey: openaiApiKey
-        });
+        const openai = new OpenAIApi({ apiKey: openaiApiKey });
 
-        // Format the date in YYYY-MM-DD format
-        const formattedDate = new Date(date).toISOString().split('T')[0];
+        // Parse the concert date
+        let concertDate = new Date(date); 
+        const today = new Date();
+
+        // Ensure we only modify the year if the concert date is in the future
+        if (concertDate > today) {
+            const previousYear = concertDate.getFullYear() - 1;
+            concertDate.setFullYear(previousYear);
+            console.log(`Concert is in the future. Using weather from previous year: ${concertDate.toISOString().split('T')[0]}`);
+        } else {
+            console.log(`Concert is in the past or today. Using actual concert date: ${concertDate.toISOString().split('T')[0]}`);
+        }
+
+        // Format the date as YYYY-MM-DD
+        const formattedDate = concertDate.toISOString().split('T')[0];
 
         // API endpoint for daily historical weather data
         const weatherApiUrl = `https://meteostat.p.rapidapi.com/point/daily?lat=${latitude}&lon=${longitude}&start=${formattedDate}&end=${formattedDate}`;
@@ -37,36 +49,22 @@ export async function execute(latitude, longitude, date, stadium) {
             method: 'GET',
             headers: {
                 'x-rapidapi-host': 'meteostat.p.rapidapi.com',
-                'x-rapidapi-key': apiKey
+                'x-rapidapi-key': meteostatApiKey
             }
         });
 
-        // Check if the response is OK (status 200)
-        if (!response.ok) {
-            throw new Error(`API call failed with status ${response.status}: ${response.statusText}`);
-        }
-
-        // Parse the JSON response
+        if (!response.ok) throw new Error(`Meteostat API call failed with status ${response.status}`);
         const data = await response.json();
 
-        // Log the raw data for debugging
-        console.log('Weather API response:', JSON.stringify(data, null, 2));
-
-        // Check if data is available for the date and if the relevant fields exist
-        if (!data.data || data.data.length === 0) {
-            throw new Error('No weather data available for the given date and location');
-        }
+        if (!data.data || data.data.length === 0) throw new Error('No historical weather data available for the given date.');
 
         const weatherEntry = data.data[0];  // Extract the first entry
 
-        // Use correct property names (tavg for temperature and prcp for precipitation)
+        // Extract temperature and precipitation data
         const temperature_avg = weatherEntry.tavg !== undefined ? weatherEntry.tavg : null;
         const precipitation = weatherEntry.prcp !== undefined ? weatherEntry.prcp : 0;
 
-        // Ensure temperature_avg is present
-        if (temperature_avg === null) {
-            throw new Error('Temperature data is not available');
-        }
+        if (temperature_avg === null) throw new Error('Temperature data is not available.');
 
         // Categorize the weather
         const temperatureDescription = temperature_avg > 18 ? 'warm' : 'cold';

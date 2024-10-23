@@ -22,6 +22,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Function to dynamically load available functions
 async function getFunctions() {
     const files = fs.readdirSync(path.resolve(process.cwd(), "./functions"));
     const openAIFunctions = {};
@@ -49,7 +50,6 @@ app.post('/api/openai-call', async (req, res) => {
     const { user_message } = req.body;
 
     try {
-        // Detect if the message contains a city or stadium name
         const functions = await getFunctions();
         const availableFunctions = Object.values(functions).map(fn => fn.details);
 
@@ -76,8 +76,7 @@ app.post('/api/openai-call', async (req, res) => {
             // If OpenAI detects a stadium name, prioritize get_weather
             if (functionName === 'get_weather') {
                 console.log(`Calling get_weather with parameters: ${JSON.stringify(parameters)}`);
-                const weatherResult = await functions['get_weather'].execute(parameters.latitude, parameters.longitude, parameters.date);
-
+                
                 // Find the stadium in the JSON file to also display the image
                 const stadiums = JSON.parse(fs.readFileSync('./public/eras_tour_stadiums.json', 'utf8'));
                 const stadiumData = stadiums.find(stadium => stadium.name.toLowerCase() === parameters.stadium.toLowerCase());
@@ -85,6 +84,15 @@ app.post('/api/openai-call', async (req, res) => {
                 if (!stadiumData) {
                     return res.status(404).json({ error: 'Stadium not found for weather.' });
                 }
+
+                // Parse and format the date from the JSON
+                const concertDate = new Date(stadiumData.date);
+                const formattedDate = concertDate.toISOString().split('T')[0]; // Convert to YYYY-MM-DD
+
+                console.log(`Concert date for ${stadiumData.name}: ${formattedDate}`);
+
+                // Call the get_weather function with the corrected date
+                const weatherResult = await functions['get_weather'].execute(stadiumData.latitude, stadiumData.longitude, formattedDate);
 
                 // Return the response from get_weather along with the image
                 const message = `
@@ -97,10 +105,12 @@ app.post('/api/openai-call', async (req, res) => {
             // If OpenAI detects a city, call get_location and find_closest_stadium
             else if (functionName === 'get_location') {
                 console.log(`Calling get_location with parameters: ${JSON.stringify(parameters)}`);
+                
                 const locationResult = await functions['get_location'].execute(parameters.city);
                 const { latitude, longitude } = locationResult.location;
 
                 console.log(`Calling find_closest_stadium with coordinates: latitude=${latitude}, longitude=${longitude}`);
+                
                 const stadiumResult = await functions['find_closest_stadium'].execute(latitude, longitude);
 
                 // Generate a response using Taylor Swift references
@@ -134,6 +144,55 @@ app.post('/api/openai-call', async (req, res) => {
         res.status(500).json({ error: 'OpenAI API failed', details: error.message });
     }
 });
+
+
+// // Route to handle weather retrieval directly (in case needed)
+// app.post('/api/get-concert-weather', async (req, res) => {
+//     console.log('get-concert-weather route called');
+//     const { stadium_message } = req.body;
+
+//     try {
+//         // Log the user input for debugging
+//         console.log(`User input: ${stadium_message}`);
+
+//         // Extract the stadium name from the message
+//         const stadiumMatch = stadium_message.match(/in\s+(.+)/i);
+//         if (!stadiumMatch || stadiumMatch.length < 2) {
+//             return res.status(400).json({ error: 'Invalid stadium message format. Please enter a message like "Let me relive the concert in [stadium]"' });
+//         }
+
+//         const stadiumName = stadiumMatch[1].trim();
+//         console.log(`Extracted stadium name: ${stadiumName}`);
+
+//         // Read the stadium data from the JSON file
+//         const stadiums = JSON.parse(fs.readFileSync('./public/eras_tour_stadiums.json', 'utf8'));
+//         const stadiumData = stadiums.find(stadium => stadium.name.toLowerCase() === stadiumName.toLowerCase());
+
+//         if (!stadiumData) {
+//             return res.status(404).json({ error: `Stadium '${stadiumName}' not found. Please try again with a valid stadium name.` });
+//         }
+
+//         // Retrieve the date, latitude, and longitude of the concert from the JSON file
+//         const { latitude, longitude, date } = stadiumData;
+
+//         // Log the concert date to the console
+//         console.log(`Concert date for ${stadiumData.name}: ${date}`);
+
+//         // Call the get_weather function to fetch weather data for the concert date
+//         const functions = await getFunctions();  // Assuming this gets all functions, including get_weather
+//         const weatherResult = await functions['get_weather'].execute(latitude, longitude, date, stadiumData.name);
+
+//         if (!weatherResult) {
+//             return res.status(404).json({ error: 'Weather data not found.' });
+//         }
+
+//         // Send the user-specific message from ChatGPT back as the response
+//         res.json({ message: weatherResult.message });
+//     } catch (error) {
+//         console.error('Error fetching concert weather:', error.message);
+//         res.status(500).json({ error: 'Failed to retrieve concert weather', details: error.message });
+//     }
+// });
 
 // Start the server
 const PORT = 3000;
