@@ -1,5 +1,5 @@
 import OpenAIApi from 'openai';
-import fetch from 'node-fetch';  // Ensure you have this or use the appropriate fetch method for your environment
+import fetch from 'node-fetch'; 
 
 export const details = {
     name: "get_weather",
