@@ -5,25 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find the Closest Stadium or Relive the Concert</title>
     <style>
+        /* General page styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #E6E6FA; /* Soft lavender pastel background */
+            color: #333; /* Darker text for contrast */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body spans the full height */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align content at the top */
+            text-align: center;
+        }
+
+        /* Allow scrolling for the entire page */
+        html, body {
+            height: 100%;
+            overflow-y: scroll; /* Allow vertical scrolling */
+        }
+
+        /* Container for the main content */
+        .content-container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px; /* Push the content down a bit */
+            margin-bottom: 50px; /* Add margin at the bottom to allow scrolling */
+        }
+
+        /* Styling for headings */
+        h1 {
+            font-size: 2.5em;
+            color: #6A5ACD; /* Soft purple for a bold title */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            color: #4B0082; /* A deeper purple for subheadings */
+            margin: 10px 0;
+        }
+
+        /* Input styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: 2px solid #9370DB;
+            border-radius: 5px;
+            margin-top: 20px;
+            box-sizing: border-box; /* Ensure padding doesn't affect the width */
+        }
+
+        /* Button styling */
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #9370DB; /* Lavender button */
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6A5ACD; /* Darker on hover */
+        }
+
         /* Container for the images */
         .image-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px; /* Add some space between the images */
-            max-width: 100%; /* Ensure the container stays within screen width */
+            margin-top: 20px;
         }
 
         /* Fixed size for the images */
         .fixed-size-image {
-            width: 250px; /* Set the width of the images */
-            height: 250px; /* Set the height of the images */
+            width: 200px; /* Set a fixed size for the images */
+            height: 200px;
             object-fit: cover; /* Ensure the image fits within the defined width and height */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Style for the result container */
         #result {
             white-space: pre-line;
+            margin-top: 20px;
         }
     </style>
     <script>
@@ -66,32 +142,36 @@
             const imageContainer = document.createElement("div");
             imageContainer.classList.add("image-container");
 
-            // // Add images (stadium image and weather condition image)
-            // const stadiumImage = document.createElement("img");
-            // stadiumImage.src = data.stadiumImageUrl; // Ensure your backend returns this
-            // stadiumImage.classList.add("fixed-size-image");
+            // Add stadium image and weather image to the container if available
+            if (data.stadiumImageUrl) {
+                const stadiumImage = document.createElement("img");
+                stadiumImage.src = data.stadiumImageUrl;
+                stadiumImage.classList.add("fixed-size-image");
+                imageContainer.appendChild(stadiumImage);
+            }
 
-            // const weatherImage = document.createElement("img");
-            // weatherImage.src = data.weatherImageUrl; // Ensure your backend returns this
-            // weatherImage.classList.add("fixed-size-image");
+            if (data.weatherImageUrl) {
+                const weatherImage = document.createElement("img");
+                weatherImage.src = data.weatherImageUrl;
+                weatherImage.classList.add("fixed-size-image");
+                imageContainer.appendChild(weatherImage);
+            }
 
-            // // Append images to container
-            // imageContainer.appendChild(stadiumImage);
-            // imageContainer.appendChild(weatherImage);
-
-            // // Append image container to resultDiv
-            // resultDiv.appendChild(imageContainer);
+            // Append the image container to the result div
+            resultDiv.appendChild(imageContainer);
         }
     </script>
 </head>
 <body>
-    <h1>Find the Closest Stadium or Relive a Taylor Swift Concert!</h1>
-    <input type="text" id="userInput" placeholder="Enter your city or stadium name (e.g., Boston or Gillette Stadium)" />
-    <button onclick="handleUserInput()">Submit</button>
-    <br><br>
+    <div class="content-container">
+        <h1>What if ... I would have attended a Taylor Swift concert at the Eras Tour?</h1>
+        <h2>You don't know where you want to go? - Ask about any location and find out which stadium is closest.</h2>
+        <h2>Already have a venue in mind? - Find out what it was like being there!</h2>
+        <input type="text" id="userInput" placeholder="Enter a city or stadium" />
+        <button onclick="handleUserInput()">Submit</button>
 
-    <!-- Container for displaying the result including the images -->
-    <div id="result"></div>
-
+        <!-- Container for displaying the result including the images -->
+        <div id="result"></div>
+    </div>
 </body>
 </html>
